@@ -29,6 +29,20 @@ Step2: On Master only:
 
 sudo kubeadm init --ignore-preflight-errors=all
 
+[P.S ( [kubelet-check] It seems like the kubelet isn't running or healthy.)
+For the above error please use the below
+Create this file "daemon.json" in the directory "/etc/docker" and add the following
+
+{
+"exec-opts": ["native.cgroupdriver=systemd"]
+}
+
+Restart your docker service: systemctl restart docker
+
+Reset kubeadm initializations: kubeadm reset
+
+Initialize your network: kubeadm init ..........]
+
 sudo mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
